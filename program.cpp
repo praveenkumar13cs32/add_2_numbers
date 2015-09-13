@@ -89,18 +89,44 @@ typedef char CH;
 #define NL              N L(n)
 
 /*------------ 11. Other ----------- */
-#define FR              freopen("i.txt","r",stdin);
+#define FR              freopen("input.txt","r",stdin);
+#define FO              freopen("output.txt","w",stdout);
 #define R               return 0;
 #define SYC             ios::sync_with_stdio(false);
 
 /*------------ 12. Main Program ----------- */
-LL sum(LL x,LL y)
+bool if_correct_input(string s,string t)
 {
-    return x+y;
+    I(0,s.length()) if(s[i]<'0' || s[i]>'9') return false;
+    I(0,t.length()) if(t[i]<'0' || t[i]>'9') return false;
+    return true;
+}
+string sum(string s,string t)
+{
+    int carry=0,counter=0;
+    string ans;
+    LL sl=s.length()-1;
+    LL tl=t.length()-1;
+    while(sl>=0 || tl>=0 || carry!=0)
+    {
+        int temp=carry;
+        if(sl>=0) temp+=s[sl--]-'0';
+        if(tl>=0) temp+=t[tl--]-'0';
+        if(temp>9) carry=1,temp=temp-10;
+        else carry=0;
+        ans+=char(temp+'0');
+    }
+    reverse(ans.begin(),ans.end());
+    return ans;
 }
 int main()
 {
-    X Y
-    O sum(x,y);
+    SYC FR FO
+    string s,t;
+    while(C s>>t)
+    {
+        if(if_correct_input(s,t)) O sum(s,t) E
+        else O "Wrong Input Format" E
+    }
     R
 }
